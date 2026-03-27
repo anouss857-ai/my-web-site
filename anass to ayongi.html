@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Ahyoung · My Love Story</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-gradient-start: #FFF5F7;
+            --bg-gradient-mid: #FFE9EF;
+            --bg-gradient-end: #FFE0E8;
+            --card-bg: rgba(255, 245, 250, 0.7);
+            --card-border: rgba(255, 183, 197, 0.5);
+            --text-primary: #5a4a5a;
+            --text-secondary: #7A5A6A;
+            --text-soft: #A15A78;
+            --accent-pink: #D47B9A;
+            --accent-dark-pink: #C46B8B;
+            --accent-light-pink: #FFB7C5;
+            --navbar-bg: rgba(255, 245, 250, 0.85);
+            --button-gradient-start: #FFD0DC;
+            --button-gradient-end: #FFC0D0;
+            --shadow-color: rgba(212, 123, 154, 0.2);
+            --heart-color: #D47B9A;
+            --loading-bg: #FFF5F7;
+        }
+
+        body.dark-mode {
+            --bg-gradient-start: #1a1428;
+            --bg-gradient-mid: #231b2e;
+            --bg-gradient-end: #2a1f35;
+            --card-bg: rgba(35, 28, 45, 0.8);
+            --card-border: rgba(212, 123, 154, 0.4);
+            --text-primary: #e2d4e6;
+            --text-secondary: #c9bcd4;
+            --text-soft: #ffc0d0;
+            --accent-pink: #FFB7C5;
+            --accent-dark-pink: #ff9eb5;
+            --accent-light-pink: #D47B9A;
+            --navbar-bg: rgba(26, 20, 40, 0.9);
+            --button-gradient-start: #8a5a7a;
+            --button-gradient-end: #a56a8a;
+            --shadow-color: rgba(255, 183, 197, 0.2);
+            --heart-color: #FFB7C5;
+            --loading-bg: #1a1428;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-mid) 50%, var(--bg-gradient-end) 100%);
+            font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            color: var(--text-primary);
+            transition: background 0.4s ease, color 0.3s ease;
+        }
+
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--loading-bg);
+            background: linear-gradient(135deg, #FFE9EF, #FFD9E6);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.4, 1), visibility 0s linear 0.8s;
+            opacity: 1;
+            visibility: visible;
+        }
+        body.dark-mode .loading-screen {
+            background: linear-gradient(135deg, #231b2e, #1a1428);
+        }
+        .loading-screen.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .loading-content {
+            text-align: center;
+            animation: bounceSoft 1.2s infinite ease-in-out;
+        }
+        @keyframes bounceSoft {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        .loading-heart {
+            font-size: 4rem;
+            color: #D47B9A;
+            animation: heartBeat 1s infinite;
+            margin-bottom: 1rem;
+        }
+        body.dark-mode .loading-heart {
+            color: #FFB7C5;
+        }
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        .loading-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #C46B8B;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+        }
+        body.dark-mode .loading-text {
+            color: #FFB7C5;
+        }
+        .loading-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: #D47B9A;
+            border-radius: 50%;
+            animation: dotPulse 1.2s infinite ease-in-out;
+        }
+        body.dark-mode .dot {
+            background: #FFB7C5;
+        }
+        .dot:nth-child(1) { animation-delay: 0s; }
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes dotPulse {
+            0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+        .cute-message {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #A15A78;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        body.dark-mode .cute-message {
+            color: #c9bcd4;
+        }
+
+        /* Cinematic Background */
+        .cinematic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .bg-soft {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 40%, rgba(255, 217, 230, 0.6) 0%, rgba(255, 192, 208, 0.4) 100%);
+            animation: softGlow 8s infinite alternate;
+        }
+        body.dark-mode .bg-soft {
+            background: radial-gradient(circle at 30% 40%, rgba(90, 60, 110, 0.5) 0%, rgba(60, 40, 80, 0.6) 100%);
+        }
+        @keyframes softGlow {
+            0% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+        .film-grain {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-radial-gradient(circle at 20% 30%, rgba(255,200,210,0.1) 0px, rgba(255,200,210,0.1) 1px, transparent 1px, transparent 3px);
+            pointer-events: none;
+            opacity: 0.3;
+        }
+        .vignette {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(255,240,245,0.1) 0%, rgba(255,210,220,0.2) 100%);
+            pointer-events: none;
+        }
+        body.dark-mode .vignette {
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%);
+        }
+
+        /* Floating Petals & Hearts */
+        .petal {
+            position: absolute;
+            background: radial-gradient(circle, var(--accent-light-pink), var(--accent-pink));
+            width: 10px;
+            height: 18px;
+            border-radius: 40% 60% 50% 50%;
+            opacity: 0.5;
+            animation: floatSoft 22s infinite linear;
+            pointer-events: none;
+        }
+        @keyframes floatSoft {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            80% { opacity: 0.5; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+        
+        .floating-heart-bg {
+            position: absolute;
+            font-size: 14px;
+            opacity: 0.2;
+            animation: floatHeart 18s infinite ease-in-out;
+            pointer-events: none;
+        }
+        @keyframes floatHeart {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.3; }
+            80% { opacity: 0.2; }
+            100% { transform: translateY(-100px) rotate(15deg); opacity: 0; }
+        }
+
+        /* Navigation Menu */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--navbar-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px var(--shadow-color);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--accent-pink);
+            letter-spacing: 2px;
+        }
+        .logo span {
+            color: var(--text-soft);
+            font-size: 0.85rem;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-soft);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+        }
+        .nav-links a:hover {
+            color: var(--accent-pink);
+            transform: translateY(-2px);
+        }
+        
+        .theme-toggle {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            transition: all 0.3s;
+        }
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-light-pink);
+        }
+        
+        @media (max-width: 700px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 0.8rem;
+                padding: 0.8rem 1rem;
+            }
+            .nav-links {
+                gap: 1.5rem;
+            }
+            .theme-toggle {
+                margin-top: 0.3rem;
+            }
+        }
+        .main-content {
+            position: relative;
+            z-index: 10;
+            padding-top: 80px;
+            opacity: 0;
+            transform: scale(0.98);
+            transition: opacity 1s cubic-bezier(0.2, 0.9, 0.4, 1), transform 0.8s ease;
+        }
+        .main-content.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.9s cubic-bezier(0.2, 0.9, 0.3, 1);
+        }
+        section.visible-section {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border-radius: 48px;
+            padding: 2.5rem;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 20px 40px var(--shadow-color);
+            transition: all 0.3s ease;
+        }
+        .hero-section {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 0;
+        }
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            color: var(--accent-dark-pink);
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+        }
+        .hero-subtitle {
+            color: var(--text-soft);
+            font-size: 1rem;
+            letter-spacing: 2px;
+        }
+        .korean-hero {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 1.2rem;
+            color: var(--accent-pink);
+            margin-top: 1rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .gallery-item {
+            position: relative;
+            border-radius: 28px;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            cursor: pointer;
+            box-shadow: 0 15px 30px var(--shadow-color);
+            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease, filter 0.5s;
+        }
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 40px var(--shadow-color);
+        }
+        .gallery-item:hover img {
+            transform: scale(1.08);
+            filter: brightness(0.9) blur(1px);
+        }
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(196, 107, 139, 0.9), transparent);
+            padding: 1.5rem;
+            color: white;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s;
+            text-align: center;
+            font-weight: 500;
+        }
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .info-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border-radius: 32px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s;
+            border: 1px solid var(--card-border);
+        }
+        .info-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-light-pink);
+            box-shadow: 0 20px 35px var(--shadow-color);
+        }
+        .info-icon {
+            font-size: 2.5rem;
+            color: var(--accent-pink);
+            margin-bottom: 1rem;
+        }
+        .info-card h3 {
+            color: var(--text-soft);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        .info-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        .heart-text {
+            color: var(--accent-pink);
+            font-size: 1.8rem;
+            margin: 0.5rem 0;
+        }
+
+        .love-message {
+            text-align: center;
+        }
+        .love-message p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin: 1rem 0;
+        }
+        .korean-love {
+            font-family: 'Noto Sans KR', serif;
+            font-size: 1.5rem;
+            color: var(--accent-pink);
+            margin: 1.5rem 0;
+        }
+
+        .curious-btn {
+            background: linear-gradient(135deg, var(--button-gradient-start), var(--button-gradient-end));
+            border: none;
+            padding: 14px 40px;
+            border-radius: 60px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: white;
+            cursor: pointer;
+            transition: all 0.4s;
+            margin: 1.5rem 0;
+            animation: breathGlow 3s infinite ease-in-out;
+            box-shadow: 0 8px 20px var(--shadow-color);
+        }
+        @keyframes breathGlow {
+            0% { box-shadow: 0 8px 20px var(--shadow-color); transform: scale(1); }
+            50% { box-shadow: 0 12px 30px rgba(212, 123, 154, 0.5); transform: scale(1.02); }
+            100% { box-shadow: 0 8px 20px var(--shadow-color); transform: scale(1); }
+        }
+        .curious-btn:hover {
+            transform: scale(1.03);
+            filter: brightness(1.05);
+        }
+        .hidden-message {
+            max-width: 500px;
+            margin: 1rem auto;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border-radius: 40px;
+            padding: 1.8rem;
+            opacity: 0;
+            filter: blur(8px);
+            transform: scale(0.95);
+            transition: all 0.6s ease;
+            border: 2px solid var(--accent-light-pink);
+            box-shadow: 0 15px 30px var(--shadow-color);
+        }
+        .hidden-message.revealed {
+            opacity: 1;
+            filter: blur(0);
+            transform: scale(1);
+        }
+        .hidden-message p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Music Player */
+        .music-player {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 60px;
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 200;
+            border: 1px solid var(--accent-light-pink);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+            color: var(--accent-pink);
+            box-shadow: 0 8px 20px var(--shadow-color);
+        }
+        .music-player:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 28px var(--shadow-color);
+        }
+
+        /* Final Section */
+        .final-section {
+            text-align: center;
+            padding-bottom: 6rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 700px) {
+            section {
+                padding: 3rem 1rem;
+            }
+            .glass-card {
+                padding: 1.5rem;
+            }
+            .love-message p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--bg-gradient-end); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-light-pink); border-radius: 10px; }
+        
+        /* Heart Animation */
+        @keyframes heartBeatAnim {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .heart-beat {
+            animation: heartBeatAnim 1s infinite;
+        }
+    </style>
+</head>
+<body>
+
+<div class="loading-screen" id="loadingScreen">
+    <div class="loading-content">
+        <div class="loading-heart">
+            <i class="fas fa-heart"></i>
+        </div>
+        <div class="loading-text">
+            Loading For Ahyoung...
+        </div>
+        <div class="loading-dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+        <div class="cute-message">
+            💗 something for u 💗<br>
+            ✨ made by me ✨
+        </div>
+    </div>
+</div>
+
+<!-- Soft Pink Cinematic Background -->
+<div class="cinematic-bg">
+    <div class="bg-soft"></div>
+    <div class="film-grain"></div>
+    <div class="vignette"></div>
+</div>
+
+<!-- Navigation Menu -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">🌸 Ahyoung <span>· my love</span></div>
+        <ul class="nav-links">
+            <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#gallery"><i class="fas fa-images"></i> Gallery</a></li>
+            <li><a href="#about"><i class="fas fa-heart"></i> About You</a></li>
+            <li><a href="#message"><i class="fas fa-envelope"></i> My Heart</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggleBtn">
+            <i class="fas fa-moon" id="themeIcon"></i>
+            <span id="themeText">Dark Mode</span>
+        </button>
+    </div>
+</nav>
+
+<div class="main-content" id="mainContent">
+    <!-- Home Section -->
+    <section id="home" class="hero-section">
+        <div class="glass-card" style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <h1 class="hero-title">For You, Ahyoung ✨</h1>
+            <p class="hero-subtitle">someone who makes my world more beautiful</p>
+            <div class="korean-heart" style="margin-top: 1.5rem;">
+                <i class="fas fa-heart" style="color: var(--heart-color); font-size: 2rem; animation: heartBeatAnim 1.5s infinite;"></i>
+            </div>
+            <p class="korean-hero" style="margin-top: 1.5rem;">💗 당신은 나의 전부입니다 💗</p>
+            <p style="margin-top: 1rem; color: var(--text-soft);">"Every day, you make my heart smile without even trying."</p>
+        </div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section id="gallery">
+        <div class="glass-card">
+            <h2 style="color: var(--accent-dark-pink); font-family: 'Playfair Display'; font-size: 2rem; margin-bottom: 1rem; text-align: center;">
+                <i class="fas fa-camera"></i> Precious Moments
+            </h2>
+            <p style="text-align: center; color: var(--text-soft); margin-bottom: 2rem;">🌸 소중한 순간들 · moments that live in my heart 🌸</p>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="C:\Users\anous\Desktop\picture\IMG_7549.png" alt="Sweet memory">
+                    <div class="gallery-overlay">✨ like your gentle smile</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="C:\Users\anous\Desktop\picture\" alt="Peaceful moment">
+                    <div class="gallery-overlay">🌸 평화로운 순간</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="C:\Users\anous\Desktop\picture\"Cherry blossom">
+                    <div class="gallery-overlay">💗 you bloom in my heart</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="C:\Users\anous\Desktop\picture" alt="Soft light">
+                    <div class="gallery-overlay">🌙 like moonlight</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="C:\Users\anous\Desktop\picture\" alt="Dreamy">
+                    <div class="gallery-overlay">✨ 네가 그리워</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Ahyoung Section -->
+    <section id="about">
+        <div class="glass-card">
+            <h2 style="color: var(--accent-dark-pink); font-family: 'Playfair Display'; font-size: 2rem; margin-bottom: 1rem; text-align: center;">
+                <i class="fas fa-star"></i> Why I Love You Madly ✨
+            </h2>
+            <p style="text-align: center; color: var(--text-soft); margin-bottom: 1rem;">💖 네가 너무 사랑하는 이유 💖</p>
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-icon"><i class="fas fa-smile"></i></div>
+                    <h3>Your Smile</h3>
+                    <p>A ray of sunshine that brightens my darkest days. Every time you smile, the world becomes more beautiful.</p>
+                    <div class="heart-text">🌸</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon"><i class="fas fa-music"></i></div>
+                    <h3>Your Voice</h3>
+                    <p>Like the softest melody that calms my soul. Just hearing you speak makes everything feel right.</p>
+                    <div class="heart-text">🎵</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon"><i class="fas fa-heart"></i></div>
+                    <h3>Your Heart</h3>
+                    <p>Kind, genuine, and pure. You have this rare way of making everything feel sincere and real.</p>
+                    <div class="heart-text">💗</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon"><i class="fas fa-moon"></i></div>
+                    <h3>Your Presence</h3>
+                    <p>Even in silence, your presence brings me a peace I can't find anywhere else.</p>
+                    <div class="heart-text">🌙</div>
+                </div>
+            </div>
+            <div class="love-message" style="margin-top: 2.5rem;">
+                <div class="heart-text">❤️ 사랑해요 Ahyoung ❤️</div>
+                <p class="korean-love">I love you with all my heart, endlessly and deeply.</p>
+                <p>Every day, I realize how precious you are. You're the one who makes my heart beat a little stronger, who makes every moment sweeter.</p>
+                <p style="margin-top: 1rem;"><strong>I love you madly. Forever. 🌹</strong></p>
+                <p class="korean-love" style="font-size: 1rem;">당신은 나의 전부입니다. 영원히 함께하고 싶어요.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Message Section -->
+    <section id="message">
+        <div class="glass-card" style="text-align: center;">
+            <h2 style="color: var(--accent-dark-pink); font-family: 'Playfair Display'; font-size: 1.8rem;">✨ Words from the Heart ✨</h2>
+            <div style="margin: 2rem 0;">
+                <p style="color: var(--text-soft); line-height: 1.8;">I may not always find the perfect words,<br>but my feelings for you are real and true.</p>
+                <p style="color: var(--accent-pink); margin-top: 1rem;">"You are the reason I smile every day."</p>
+                <p class="korean-love" style="font-size: 1rem; margin-top: 1rem;">💗 매일 네 생각에 웃게 돼 💗</p>
+            </div>
+            <button class="curious-btn" id="revealBtn">
+                <i class="fas fa-question-circle"></i> Click if you're curious ✨
+            </button>
+            <div id="secretMessage" class="hidden-message">
+                <i class="fas fa-heart" style="color: var(--accent-pink); font-size: 2rem; margin-bottom: 1rem;"></i>
+                <p style="font-size: 1.1rem; line-height: 1.6;">"I didn't do this to change anything between us…<br>
+                I just couldn't stay silent about how incredibly special you are to me.<br><br>
+                <strong>Ahyoung, you mean everything to me. I love you.</strong>"</p>
+                <div style="margin-top: 1rem;">💗 💗 💗</div>
+                <p class="korean-love" style="font-size: 0.9rem; margin-top: 1rem;">진심으로 사랑해요. 나의 별, 나의 모든 것.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Section -->
+    <section class="final-section">
+        <div class="glass-card">
+            <p style="font-size: 1.2rem; color: var(--accent-dark-pink); font-style: italic;">No pressure, no expectations.</p>
+            <p style="font-size: 1rem; color: var(--text-soft); margin-top: 0.8rem;">Just something I wanted to create for you, Ahyoung.</p>
+            <div style="margin-top: 2rem;">
+                <i class="fas fa-infinity" style="color: var(--accent-pink); font-size: 2rem;"></i>
+                <p style="margin-top: 1rem;">Always and forever. ✨</p>
+                <p class="korean-love" style="font-size: 0.9rem;">영원히 당신과 함께 있고 싶어요</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Music Player - Korean Romance Music -->
+<div class="music-player" id="musicToggle">
+    <i class="fas fa-play-circle" id="musicIcon"></i>
+    <span style="font-size: 0.8rem; font-weight: 500;">🎵 Korean Romance</span>
+</div>
+
+<script>
+    (function() {
+        // ------------------------------
+        // 1. LOADING SCREEN - 5 SECONDS THEN CUTE REVEAL
+        // ------------------------------
+        const loadingScreen = document.getElementById('loadingScreen');
+        const mainContent = document.getElementById('mainContent');
+        let loadingTimeout;
+        
+        // Function to reveal main content with cute animation
+        function revealMainContent() {
+            // Hide loading screen with fade out
+            loadingScreen.classList.add('hide');
+            // Show main content with smooth scale and fade in
+            mainContent.classList.add('visible');
+            
+            // Create cute confetti hearts effect after loading
+            createWelcomeHearts();
+            
+            // Trigger scroll reveal for sections
+            setTimeout(() => {
+                initScrollReveal();
+                // Make first section visible if needed
+                const firstSection = document.querySelector('section');
+                if (firstSection && firstSection.getBoundingClientRect().top < window.innerHeight - 100) {
+                    firstSection.classList.add('visible-section');
+                }
+            }, 300);
+        }
+        
+        // Create cute heart explosion when loading finishes
+        function createWelcomeHearts() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = ['💗', '🌸', '✨', '💕', '💖', '🌙'][Math.floor(Math.random() * 6)];
+                    heart.style.position = 'fixed';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.top = '50%';
+                    heart.style.fontSize = (20 + Math.random() * 20) + 'px';
+                    heart.style.opacity = '0.8';
+                    heart.style.pointerEvents = 'none';
+                    heart.style.zIndex = '10000';
+                    heart.style.transition = 'all 1.2s ease';
+                    heart.style.transform = 'translateY(0)';
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.style.transform = `translateY(-${100 + Math.random() * 150}px) translateX(${(Math.random() - 0.5) * 100}px)`;
+                        heart.style.opacity = '0';
+                    }, 10);
+                    setTimeout(() => heart.remove(), 1300);
+                }, i * 80);
+            }
+        }
+        
+        // Set 5 second timer for loading screen
+        loadingTimeout = setTimeout(() => {
+            revealMainContent();
+        }, 5000);
+        
+        // Optional: allow user to skip by clicking (but still cute)
+        loadingScreen.addEventListener('click', () => {
+            if (loadingTimeout) {
+                clearTimeout(loadingTimeout);
+                revealMainContent();
+            }
+        });
+        
+        // ------------------------------
+        // 2. CREATE FLOATING PETALS & HEARTS
+        // ------------------------------
+        const bgLayer = document.querySelector('.cinematic-bg');
+        for (let i = 0; i < 40; i++) {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            petal.style.left = Math.random() * 100 + '%';
+            petal.style.animationDuration = 18 + Math.random() * 20 + 's';
+            petal.style.animationDelay = Math.random() * 15 + 's';
+            petal.style.width = 6 + Math.random() * 12 + 'px';
+            petal.style.height = 10 + Math.random() * 16 + 'px';
+            bgLayer.appendChild(petal);
+        }
+        
+        for (let i = 0; i < 25; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart-bg');
+            heart.innerHTML = '💗';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.top = Math.random() * 100 + '%';
+            heart.style.animationDuration = 15 + Math.random() * 20 + 's';
+            heart.style.animationDelay = Math.random() * 10 + 's';
+            bgLayer.appendChild(heart);
+        }
+
+        // ------------------------------
+        // 3. SCROLL REVEAL ANIMATION
+        // ------------------------------
+        function initScrollReveal() {
+            const sections = document.querySelectorAll('section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible-section');
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+            sections.forEach(section => observer.observe(section));
+        }
+
+        // ------------------------------
+        // 4. KOREAN ROMANCE MUSIC (Fixed Working)
+        // ------------------------------
+        const audio = new Audio('https://cdn.pixabay.com/download/audio/2022/05/27/audio_1c3b5e2f1a.mp3?filename=korean-romance-110202.mp3');
+        audio.loop = true;
+        audio.volume = 0;
+        let isPlaying = false;
+        let musicStarted = false;
+        
+        const musicBtn = document.getElementById('musicToggle');
+        const musicIconSpan = document.getElementById('musicIcon');
+        
+        function fadeInMusic(targetVol = 0.32, step = 0.012) {
+            if (audio.volume < targetVol) {
+                audio.volume = Math.min(audio.volume + step, targetVol);
+                requestAnimationFrame(() => fadeInMusic(targetVol, step));
+            }
+        }
+        
+        function fadeOutMusic(callback) {
+            const interval = setInterval(() => {
+                if (audio.volume <= 0.02) {
+                    audio.pause();
+                    audio.volume = 0;
+                    clearInterval(interval);
+                    if (callback) callback();
+                } else {
+                    audio.volume = Math.max(0, audio.volume - 0.05);
+                }
+            }, 40);
+        }
+        
+        function toggleMusic() {
+            if (!musicStarted) {
+                audio.play().then(() => {
+                    fadeInMusic(0.32, 0.012);
+                    isPlaying = true;
+                    musicStarted = true;
+                    musicIconSpan.className = 'fas fa-pause-circle';
+                }).catch(e => {
+                    musicIconSpan.className = 'fas fa-play-circle';
+                });
+            } else if (isPlaying) {
+                fadeOutMusic(() => {
+                    isPlaying = false;
+                    musicIconSpan.className = 'fas fa-play-circle';
+                });
+            } else {
+                audio.play().then(() => {
+                    audio.volume = 0;
+                    fadeInMusic(0.32, 0.012);
+                    isPlaying = true;
+                    musicIconSpan.className = 'fas fa-pause-circle';
+                }).catch(e => {});
+            }
+        }
+        
+        musicBtn.addEventListener('click', toggleMusic);
+        
+        // Auto-start after user interaction
+        document.body.addEventListener('click', function initMusicOnFirstClick() {
+            if (!musicStarted && !isPlaying) {
+                audio.play().then(() => {
+                    fadeInMusic(0.32, 0.012);
+                    isPlaying = true;
+                    musicStarted = true;
+                    musicIconSpan.className = 'fas fa-pause-circle';
+                }).catch(() => {});
+            }
+        }, { once: true });
+        
+        audio.addEventListener('error', function() {
+            audio.src = 'https://cdn.pixabay.com/download/audio/2022/02/22/audio_d5c5a5c1f1.mp3?filename=romantic-piano-184189.mp3';
+            audio.load();
+            if (isPlaying) {
+                audio.play().then(() => fadeInMusic(0.32)).catch(() => {});
+            }
+        });
+
+        // ------------------------------
+        // 5. INTERACTIVE BUTTON
+        // ------------------------------
+        const revealBtn = document.getElementById('revealBtn');
+        const secretMsg = document.getElementById('secretMessage');
+        let revealed = false;
+        
+        revealBtn.addEventListener('click', () => {
+            if (!revealed) {
+                secretMsg.classList.add('revealed');
+                revealed = true;
+                createHeartExplosion(revealBtn);
+            } else {
+                secretMsg.style.transform = 'scale(1.02)';
+                setTimeout(() => { secretMsg.style.transform = ''; }, 300);
+                createHeartExplosion(revealBtn);
+            }
+        });
+        
+        function createHeartExplosion(btn) {
+            const rect = btn.getBoundingClientRect();
+            for (let i = 0; i < 12; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = ['💗', '🌸', '✨', '💕', '💖'][Math.floor(Math.random() * 5)];
+                heart.style.position = 'fixed';
+                heart.style.left = rect.left + rect.width/2 + (Math.random() - 0.5)*50 + 'px';
+                heart.style.top = rect.top - 10 + 'px';
+                heart.style.fontSize = '18px';
+                heart.style.opacity = '0.9';
+                heart.style.pointerEvents = 'none';
+                heart.style.zIndex = '10000';
+                heart.style.transition = 'all 0.8s ease';
+                document.body.appendChild(heart);
+                setTimeout(() => {
+                    heart.style.transform = `translateY(-${50 + Math.random()*60}px) translateX(${(Math.random()-0.5)*60}px)`;
+                    heart.style.opacity = '0';
+                }, 10);
+                setTimeout(() => heart.remove(), 900);
+            }
+        }
+        
+        // ------------------------------
+        // 6. DARK MODE TOGGLE
+        // ------------------------------
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeIcon.className = 'fas fa-sun';
+            themeText.textContent = 'Light Mode';
+        }
+        
+        themeToggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            if (isDark) {
+                themeIcon.className = 'fas fa-sun';
+                themeText.textContent = 'Light Mode';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.className = 'fas fa-moon';
+                themeText.textContent = 'Dark Mode';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // ------------------------------
+        // 7. SMOOTH NAVIGATION
+        // ------------------------------
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        console.log("✨ Ahyoung's website ready - Cute loading screen + Light/Dark Mode ✨");
+    })();
+</script>
+</body>
+</html>
